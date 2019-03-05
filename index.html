@@ -29,14 +29,11 @@
          .attr("fill",function(d){
            return d.color
          })
-
-      dataPj.then(function(data){
-        console.log(data),
-        drawChart(data)
-      })
-
-
     }
+    dataPj.then(function(data){
+      console.log(data),
+      drawChart(data)
+    })
 
     </script>
   <svg>
