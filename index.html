@@ -4,10 +4,10 @@
 </head>
 <body>
   <script type="text/javascript">
-    var dataPj=d3.json("https://beckysx.github.io/mar05lab/mar05lab/color.json");
+    var dataPj=d3.json("color.json");
     var drawChart = function(data){
-      var width=400;
-      var height=200;
+      var width=1000;
+      var height=600;
       var barwidth=width/data.length;
       var svg=d3.select("svg")
                 .attr("width",width)
