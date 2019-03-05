@@ -15,6 +15,9 @@
     var height=250;
     var barpadding=2;
     var barwidth=(width/7)-barpadding;
+
+
+    var dataPj=d3.json("color.json");
     var drawChartj = function(data){
       var svg=d3.select(".json")
                 .attr("width",width)
@@ -37,12 +40,11 @@
            return d.color
          })
     }
-
-    var dataPj=d3.json("color.json");
     dataPj.then(function(data){
       console.log(data),
       drawChartj(data)
     })
+
 
     var dataPc=d3.csv("color.csv");
     var drawChartc = function(data){
