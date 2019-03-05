@@ -4,11 +4,12 @@
 </head>
 <body>
   <script type="text/javascript">
+    var width=300;
+    var height=250;
+    var barpadding=2;
+    var barwidth=(width/7)-barpadding;
     var dataPj=d3.json("color.json");
     var drawChart = function(data){
-      var width=400;
-      var height=300;
-      var barwidth=width/data.length;
       var svg=d3.select("svg")
                 .attr("width",width)
                 .attr("height",height);
@@ -17,14 +18,14 @@
          .enter()
          .append("rect")
          .attr("x",function(d,i){
-           return i*barwidth
+           return i*(barwidth+barpadding)
          })
          .attr("y",function(d){
-           return height- d.num*15
+           return height- d.num*20
          })
          .attr("width",barwidth)
          .attr("height",function(d){
-           return d.num*15
+           return d.num*20
          })
          .attr("fill",function(d){
            return d.color
@@ -34,12 +35,13 @@
       console.log(data),
       drawChart(data)
     })
-
-  
-
     </script>
-  <svg>
 
+
+
+
+
+    <svg>
     </svg>
 
   </body>
