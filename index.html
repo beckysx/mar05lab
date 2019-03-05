@@ -12,10 +12,14 @@
 </head>
 <body>
   <script type="text/javascript">
-    var width=300;
+    var width=500;
+    var chartW=300
     var height=250;
     var barpadding=2;
-    var barwidth=(width/7)-barpadding;
+    var barwidth=(chartW/7)-barpadding;
+    var legendW=15;
+    var legendH=15;
+    var legendpadding=5;
 
 
     var dataPj=d3.json("color.json");
@@ -40,39 +44,36 @@
          .attr("fill",function(d){
            return d.color
          })
+      svg.select("g").selectAll("rect")
+         .data(data)
+         .enter()
+         .append("rect")
+         .attr("x",chartW+50)
+         .attr("y",function(d,i){
+           return i*(legendH+legendpadding)
+         })
+         .attr("width",legendW)
+         .attr("height",legendH)
+         .attr("fill",function(d){
+           return d.color
+         })
+      svg.select("g").selectAll("text")
+         .data(data)
+         .enter()
+         .append("text")
+         .attr("x",chartW+legendW+65)
+         .attr("y",function(d,i){
+           return i*(legendH+legendpadding)+15
+         })
+         .text(function(d){
+           return d.color
+         })
+
+
     }
     dataPj.then(function(data){
       console.log(data),
       drawChartj(data)
-    })
-
-
-    var dataPc=d3.csv("color.csv");
-    var drawChartc = function(data){
-      var svg=d3.select(".csv")
-                .attr("width",width)
-                .attr("height",height);
-      svg.selectAll("rect")
-         .data(data)
-         .enter()
-         .append("rect")
-         .attr("x",function(d,i){
-           return i*(barwidth+barpadding)
-         })
-         .attr("y",function(d){
-           return height- d.num*20
-         })
-         .attr("width",barwidth)
-         .attr("height",function(d){
-           return d.num*20
-         })
-         .attr("fill",function(d){
-           return d.color
-         })
-    }
-    dataPc.then(function(data){
-      console.log(data),
-      drawChartc(data)
     })
 
     </script>
@@ -82,8 +83,10 @@
 
 
     <svg class="json">
+      <g class="legend"></g>
     </svg>
     <svg class="csv">
+      <g class="legend"></g>
     </svg>
 
 
