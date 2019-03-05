@@ -23,8 +23,12 @@
 
 
     var dataPj=d3.json("color.json");
-    var drawChartj = function(data){
-      var svg=d3.select(".json")
+    var dataPc=d3.csv("color.csv");
+    var dataset=[dataPj,dataPc];
+
+    var drawChart = function(data){
+      var svg=d3.select("body")
+                .selectAll("svg")
                 .attr("width",width)
                 .attr("height",height);
       // rects
@@ -91,10 +95,11 @@
 
 
     }
-    dataPj.then(function(data){
-      console.log(data),
-      drawChartj(data)
-    })
+
+    dataset.forEach(function(d){console.log (d)})
+    .then(function(data){
+      drawChart(data)
+    });
 
     </script>
 
