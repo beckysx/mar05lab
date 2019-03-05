@@ -6,7 +6,7 @@
   <script type="text/javascript">
     var dataPj=d3.json("color.json");
     var drawChart = function(data){
-      var width=1000;
+      var width=500;
       var height=600;
       var barwidth=width/data.length;
       var svg=d3.select("svg")
@@ -20,11 +20,11 @@
            return i*barwidth
          })
          .attr("y",function(d){
-           return height- d.num*5
+           return height- d.num*10
          })
          .attr("width",barwidth)
          .attr("height",function(d){
-           return d.num*5
+           return d.num*10
          })
          .attr("fill",function(d){
            return d.color
