@@ -1,6 +1,13 @@
 <html>
 <head>
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+  svg{display: block;
+      margin-left: 10%;
+      margin-bottom: 50px
+    }
+
+  </style>
 </head>
 <body>
   <script type="text/javascript">
@@ -8,9 +15,8 @@
     var height=250;
     var barpadding=2;
     var barwidth=(width/7)-barpadding;
-    var dataPj=d3.json("color.json");
-    var drawChart = function(data){
-      var svg=d3.select("svg")
+    var drawChartj = function(data){
+      var svg=d3.select(".json")
                 .attr("width",width)
                 .attr("height",height);
       svg.selectAll("rect")
@@ -31,18 +37,52 @@
            return d.color
          })
     }
+
+    var dataPj=d3.json("color.json");
     dataPj.then(function(data){
       console.log(data),
-      drawChart(data)
+      drawChartj(data)
     })
+
+    var dataPc=d3.csv("color.csv");
+    var drawChartc = function(data){
+      var svg=d3.select(".csv")
+                .attr("width",width)
+                .attr("height",height);
+      svg.selectAll("rect")
+         .data(data)
+         .enter()
+         .append("rect")
+         .attr("x",function(d,i){
+           return i*(barwidth+barpadding)
+         })
+         .attr("y",function(d){
+           return height- d.num*20
+         })
+         .attr("width",barwidth)
+         .attr("height",function(d){
+           return d.num*20
+         })
+         .attr("fill",function(d){
+           return d.color
+         })
+    }
+    dataPc.then(function(data){
+      console.log(data),
+      drawChartc(data)
+    })
+
     </script>
 
 
 
 
 
-    <svg>
+    <svg class="json">
     </svg>
+    <svg class="csv">
+    </svg>
+
 
   </body>
 </html>
